@@ -100,29 +100,22 @@ func IP4toInt(IPv4Address net.IP) int64 {
 }
 
 func main() {
-	file, err := os.Open(os.Args[1])
-	if err != nil {
-		panic(err)
+	if len(os.Args) < 2 {
+		log.Fatal("Please provide a path to a pcap file as an argument.")
 	}
-	defer file.Close()
 
-	// Create a new packet capture handle for the provided file
 	handle, err := pcap.OpenOffline(os.Args[1])
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	defer handle.Close()
 
-	// Set up a filter for capturing IP packets
-	filter := "ip"
-	err = handle.SetBPFFilter(filter)
-	if err != nil {
-		panic(err)
+	if err := handle.SetBPFFilter(filter); err != nil {
+		log.Fatal(err)
 	}
 
-	// Read in packets and extract IP source and packet length
 	var data []Point
-	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
+	packetSource := pcap.NewPacketSource(handle, handle.LinkType())
 	for packet := range packetSource.Packets() {
 		ipLayer := packet.Layer(layers.LayerTypeIPv4)
 		if ipLayer == nil {
@@ -132,20 +125,18 @@ func main() {
 		ip, _ := ipLayer.(*layers.IPv4)
 
 		packetLength := float64(len(packet.Data()))
-		point := Point{x: float64(IP4toInt(ip.SrcIP)), y: packetLength}
+		point := Point{x: float64(ip.SrcIP.To4()[0]), y: packetLength}
 
 		data = append(data, point)
 	}
 
-	// Run the KMeans algorithm on the extracted points
 	kmeans := NewKMeans(1, data)
 	clusters := kmeans.run()
 
-	// Print out the clusters
 	for _, cluster := range clusters {
 		for _, point := range cluster {
 			fmt.Println(int(point.x))
-			//fmt.Printf("[%d, %d], ", int(point.x), int(point.y))
+			// fmt.Printf("[%d, %d], ", int(point.x), int(point.y))
 		}
 	}
 }
