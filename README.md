@@ -38,7 +38,7 @@ Ubuntu / Debian:
 * Use the git package manager `git clone https://github.com/ConservativeBaron/Go-means`
 * CD into the directory `cd Go-means/`
 * Go get gopacket `go get -u github.com/google/gopacket/pcap`
-* Build the file `go build go build kmeans-clustering.go`
+* Build the file `go build kmeans-clustering.go`
 * Finally, run the binary `./kmeans-clustering capture.pcap`
 
 
