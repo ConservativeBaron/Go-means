@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math"
 	"math/big"
 	"net"
@@ -104,18 +105,27 @@ func main() {
 		log.Fatal("Please provide a path to a pcap file as an argument.")
 	}
 
+	file, err := os.Open(os.Args[1])
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+
 	handle, err := pcap.OpenOffline(os.Args[1])
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	defer handle.Close()
 
-	if err := handle.SetBPFFilter(filter); err != nil {
-		log.Fatal(err)
+	filter := "ip"
+	err = handle.SetBPFFilter(filter)
+	if err != nil {
+		panic(err)
 	}
 
 	var data []Point
-	packetSource := pcap.NewPacketSource(handle, handle.LinkType())
+	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
+
 	for packet := range packetSource.Packets() {
 		ipLayer := packet.Layer(layers.LayerTypeIPv4)
 		if ipLayer == nil {
@@ -125,7 +135,7 @@ func main() {
 		ip, _ := ipLayer.(*layers.IPv4)
 
 		packetLength := float64(len(packet.Data()))
-		point := Point{x: float64(ip.SrcIP.To4()[0]), y: packetLength}
+		point := Point{x: float64(IP4toInt(ip.SrcIP)), y: packetLength}
 
 		data = append(data, point)
 	}
@@ -136,7 +146,7 @@ func main() {
 	for _, cluster := range clusters {
 		for _, point := range cluster {
 			fmt.Println(int(point.x))
-			// fmt.Printf("[%d, %d], ", int(point.x), int(point.y))
+			//fmt.Printf("[%d, %d], ", int(point.x), int(point.y))
 		}
 	}
 }
