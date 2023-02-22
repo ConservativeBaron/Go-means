@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/ConservativeBaron/Go-means">
-    <img src="https://github.com/ConservativeBaron/Go-means/raw/main/image__1_-removebg-preview%20(1).png" alt="Logo" height="180">
+    <img src="https://github.com/ConservativeBaron/Go-means/raw/main/Images/image__1_-removebg-preview%20(1).png" alt="Logo">
   </a>
 
   <h3 align="center">Go-Means</h3>
