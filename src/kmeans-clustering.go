@@ -126,6 +126,8 @@ func main() {
 	var data []Point
 	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
 
+	seenIPs := make(map[string]bool)
+
 	for packet := range packetSource.Packets() {
 		ipLayer := packet.Layer(layers.LayerTypeIPv4)
 		if ipLayer == nil {
@@ -133,6 +135,12 @@ func main() {
 		}
 
 		ip, _ := ipLayer.(*layers.IPv4)
+
+		ipStr := ip.SrcIP.String()
+		if seenIPs[ipStr] {
+			continue
+		}
+		seenIPs[ipStr] = true
 
 		packetLength := float64(len(packet.Data()))
 		point := Point{x: float64(IP4toInt(ip.SrcIP)), y: packetLength}
