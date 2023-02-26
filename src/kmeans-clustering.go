@@ -153,8 +153,11 @@ func main() {
 
 	for _, cluster := range clusters {
 		for _, point := range cluster {
-			fmt.Println(int(point.x))
-			//fmt.Printf("[%d, %d], ", int(point.x), int(point.y))
+			intIP := int64(point.x)
+			normalIP := net.IPv4(byte(intIP>>24), byte(intIP>>16), byte(intIP>>8), byte(intIP))
+
+			fmt.Println(normalIP)
+			//fmt.Printf("[%s, %d] \n", normalIP.String(), int(point.y))
 		}
 	}
 }
