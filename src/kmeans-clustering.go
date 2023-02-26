@@ -105,61 +105,59 @@ func IP4toInt(IPv4Address net.IP) int64 {
 }
 
 func main() {
+	// check if enough arguments are passed
 	if len(os.Args) < 2 {
 		log.Fatal("Please provide a path to a pcap file as an argument.")
 	}
 
+	// open the pcap file
 	file, err := os.Open(os.Args[1])
 	if err != nil {
 		panic(err)
 	}
 	defer file.Close()
 
+	// filter pcap
 	handle, err := pcap.OpenOffline(os.Args[1])
 	if err != nil {
 		panic(err)
 	}
 	defer handle.Close()
-
 	filter := "ip"
 	err = handle.SetBPFFilter(filter)
 	if err != nil {
 		panic(err)
 	}
 
+	// extract the source IP addresses
 	var data []Point
 	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
-
 	seenIPs := make(map[string]bool)
-
 	for packet := range packetSource.Packets() {
 		ipLayer := packet.Layer(layers.LayerTypeIPv4)
 		if ipLayer == nil {
 			continue
 		}
-
 		ip, _ := ipLayer.(*layers.IPv4)
-
 		ipStr := ip.SrcIP.String()
 		if seenIPs[ipStr] {
 			continue
 		}
 		seenIPs[ipStr] = true
-
 		packetLength := float64(len(packet.Data()))
 		point := Point{x: float64(IP4toInt(ip.SrcIP)), y: packetLength}
-
 		data = append(data, point)
 	}
 
+	// execute k-means clustering
 	kmeans := NewKMeans(2, data)
 	clusters := kmeans.run()
 
+	// print clustered IP addresses
 	for _, cluster := range clusters {
 		for _, point := range cluster {
 			intIP := int64(point.x)
 			normalIP := net.IPv4(byte(intIP>>24), byte(intIP>>16), byte(intIP>>8), byte(intIP))
-
 			fmt.Println(normalIP)
 			//fmt.Printf("[%s, %d] \n", normalIP.String(), int(point.y))
 		}
