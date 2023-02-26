@@ -38,27 +38,18 @@ single command:
 git clone https://github.com/ConservativeBaron/Go-means && cd Go-means/src && go get -u github.com/google/gopacket/pcap
 ```
 
-* Use the git package manager `git clone https://github.com/ConservativeBaron/Go-means`
-* CD into the directory `cd Go-means/src`
-* Go get gopacket `go get -u github.com/google/gopacket/pcap`
-* Build the file `go build kmeans-clustering.go`
-* Finally, run the binary `./kmeans-clustering capture.pcap`
-
 ## Windows
-single command:
-
 ```sh
 git clone https://github.com/ConservativeBaron/Go-means && cd Go-means/src && go get -u github.com/google/gopacket/pcap
 ```
 
-* Use the git package manager git clone https://github.com/ConservativeBaron/Go-means
-* CD into the directory cd Go-means/src
-* Go get gopacket go get -u github.com/google/gopacket/pcap
-* Build the file go build kmeans-clustering.go
-* Finally, run the binary .\kmeans-clustering.exe capture.pcap
-
 # Examples
 <img src="https://raw.githubusercontent.com/ConservativeBaron/Go-means/main/Images/example_1.png" alt="Example usage #1, aarm64">
+
+## Usage:
+```
+~# go run kmeans-clustering.go ./capture_file.pcap
+```
 
 # Built With
 [![Go][golang-svg]][golang-url]
