@@ -1,5 +1,4 @@
 
-<br />
 <div align="center">
   <a href="https://github.com/ConservativeBaron/Go-means">
     <img src="https://github.com/ConservativeBaron/Go-means/raw/main/Images/Funny-blue-squirrel.png" alt="Logo">
@@ -8,11 +7,10 @@
   <h3 align="center">Go-Means</h3>
 
   <p align="center">
-    A simple k-means algorithm in golang
-    <br />
-</a>
-    <br />
-    <br />
+    An Lloyd's clustering algorithm in Go to identify the source of attacking IPs.
+    <br/>
+    <br/>
+    <br/>
     <a href="https://unhittable.pw">Keragation</a>
     ·
     <a href="https://discord.gg/mitigation">Discord</a>
@@ -21,7 +19,6 @@
 
 # Installing go-lang
 ### Ubuntu / Debian:
-single command:
 ```sh
 sudo apt update && sudo apt install golang -y
 ```
