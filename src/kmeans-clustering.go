@@ -148,7 +148,7 @@ func main() {
 		data = append(data, point)
 	}
 
-	kmeans := NewKMeans(1, data)
+	kmeans := NewKMeans(2, data)
 	clusters := kmeans.run()
 
 	for _, cluster := range clusters {
