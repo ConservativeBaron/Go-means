@@ -37,15 +37,18 @@ func NewKMeans(k int, data []Point) *KMeans {
 }
 
 func (kmeans *KMeans) run() [][]Point {
+	// initialize centroids
 	for i := 0; i < kmeans.k; i++ {
 		kmeans.centroids[i] = kmeans.data[i]
 	}
 
 	for iteration := 0; iteration < kmeans.maxIterations; iteration++ {
+		// reset clusters
 		for i := 0; i < kmeans.k; i++ {
-			kmeans.clusters[i] = make([]Point, 0)
+			kmeans.clusters[i] = []Point{}
 		}
 
+		// assign point to nearest cluster
 		for _, point := range kmeans.data {
 			distances := make([]float64, kmeans.k)
 			for i := 0; i < kmeans.k; i++ {
@@ -55,9 +58,10 @@ func (kmeans *KMeans) run() [][]Point {
 			kmeans.clusters[nearestCentroidIndex] = append(kmeans.clusters[nearestCentroidIndex], point)
 		}
 
-		for i := 0; i < kmeans.k; i++ {
-			if len(kmeans.clusters[i]) > 0 {
-				kmeans.centroids[i] = computeCentroid(kmeans.clusters[i])
+		// update centroids based off of means
+		for i, cluster := range kmeans.clusters {
+			if len(cluster) > 0 {
+				kmeans.centroids[i] = computeCentroid(cluster)
 			}
 		}
 	}
