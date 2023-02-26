@@ -19,12 +19,6 @@
   </p>
 </div>
 
-
-
-
-
-
-<!-- ABOUT THE PROJECT -->
 # Installation 
 To install go-means on your system you just need to follow a few simple steps.
 
@@ -41,6 +35,8 @@ Ubuntu / Debian:
 * Build the file `go build kmeans-clustering.go`
 * Finally, run the binary `./kmeans-clustering capture.pcap`
 
+## Examples
+<img src="https://raw.githubusercontent.com/ConservativeBaron/Go-means/main/Images/example_1.png" alt="Example usage #1, aarm64">
 
 ## Built With
 [![Go][golang-svg]][golang-url]
