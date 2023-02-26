@@ -19,10 +19,7 @@
   </p>
 </div>
 
-# Installation 
-To install go-means on your system you just need to follow a few simple steps.
-
-## installing golang
+# Installing go-lang
 ### Ubuntu / Debian:
 single command:
 ```sh
@@ -33,9 +30,10 @@ sudo apt update && sudo apt install golang -y
 * Install golang using apt `sudo apt install golang -y`
 * Verify installation `go version`
 
-## Installing go-means
-### Ubuntu / Debian:
+# Installing go-means
+## Ubuntu / Debian:
 single command:
+
 ```sh
 git clone https://github.com/ConservativeBaron/Go-means && cd Go-means/src && go get -u github.com/google/gopacket/pcap
 ```
@@ -45,6 +43,19 @@ git clone https://github.com/ConservativeBaron/Go-means && cd Go-means/src && go
 * Go get gopacket `go get -u github.com/google/gopacket/pcap`
 * Build the file `go build kmeans-clustering.go`
 * Finally, run the binary `./kmeans-clustering capture.pcap`
+
+## Windows
+single command:
+
+```sh
+git clone https://github.com/ConservativeBaron/Go-means && cd Go-means/src && go get -u github.com/google/gopacket/pcap
+```
+
+* Use the git package manager git clone https://github.com/ConservativeBaron/Go-means
+* CD into the directory cd Go-means/src
+* Go get gopacket go get -u github.com/google/gopacket/pcap
+* Build the file go build kmeans-clustering.go
+* Finally, run the binary .\kmeans-clustering.exe capture.pcap
 
 # Examples
 <img src="https://raw.githubusercontent.com/ConservativeBaron/Go-means/main/Images/example_1.png" alt="Example usage #1, aarm64">
