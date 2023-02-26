@@ -31,14 +31,13 @@ sudo apt update && sudo apt install golang -y
 * Verify installation `go version`
 
 # Installing go-means
-## Ubuntu / Debian:
-single command:
+### Ubuntu / Debian:
 
 ```sh
 git clone https://github.com/ConservativeBaron/Go-means && cd Go-means/src && go get -u github.com/google/gopacket/pcap
 ```
 
-## Windows
+### Windows
 ```sh
 git clone https://github.com/ConservativeBaron/Go-means && cd Go-means/src && go get -u github.com/google/gopacket/pcap
 ```
@@ -46,7 +45,7 @@ git clone https://github.com/ConservativeBaron/Go-means && cd Go-means/src && go
 # Examples
 <img src="https://raw.githubusercontent.com/ConservativeBaron/Go-means/main/Images/example_1.png" alt="Example usage #1, aarm64">
 
-## Usage:
+### Usage:
 ```
 ~# go run kmeans-clustering.go ./capture_file.pcap
 ```
