@@ -23,22 +23,33 @@
 To install go-means on your system you just need to follow a few simple steps.
 
 ## installing golang
-Ubuntu / Debian:
+### Ubuntu / Debian:
+single command:
+```sh
+sudo apt update && sudo apt install golang -y
+```
+
 * Update your system `sudo apt update`
 * Install golang using apt `sudo apt install golang -y`
 * Verify installation `go version`
+
 ## Installing go-means
-Ubuntu / Debian:
+### Ubuntu / Debian:
+single command:
+```sh
+git clone https://github.com/ConservativeBaron/Go-means && cd Go-means/src && go get -u github.com/google/gopacket/pcap
+```
+
 * Use the git package manager `git clone https://github.com/ConservativeBaron/Go-means`
 * CD into the directory `cd Go-means/src`
 * Go get gopacket `go get -u github.com/google/gopacket/pcap`
 * Build the file `go build kmeans-clustering.go`
 * Finally, run the binary `./kmeans-clustering capture.pcap`
 
-## Examples
+# Examples
 <img src="https://raw.githubusercontent.com/ConservativeBaron/Go-means/main/Images/example_1.png" alt="Example usage #1, aarm64">
 
-## Built With
+# Built With
 [![Go][golang-svg]][golang-url]
 
 [golang-svg]: https://img.shields.io/badge/Go-1.16-blue.svg
